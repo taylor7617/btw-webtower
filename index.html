@@ -1,1 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Booker T. Washington WebTower | Alumni Business Cabinet</title>
 
+  <meta
+    name="description"
+    content="Booker T. Washington High School (Memphis, TN) Alumni Business WebTower — a live trophy cabinet of alumni businesses, mapped into Memphis DC under the FlightLine."
+  />
+  <meta name="theme-color" content="#111827" />
+
+  <style>
+    :root {
+      /* 🎨 School-tuned colors: adjust for each school */
+      --bg: #020617;              /* deep navy */
+      --bg-alt: #02081c;
+      --card: #0b1120;
+      --border: #1f2937;
+      --accent: #facc15;          /* BTW gold highlight */
+      --accent-soft: rgba(250, 204, 21, 0.14);
+      --secondary: #22c55e;       /* green runway for alumni tiles */
+      --danger: #f97373;
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --glass: rgba(15, 23, 42, 0.88);
+      --shadow-strong: 0 24px 55px rgba(0, 0, 0, 0.8);
+      --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "SF Pro Text", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #020617 0, #000 55%, #020617 100%);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      padding: 16px 22px;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.96),
+        rgba(15, 23, 42, 0.9),
+        rgba(8, 47, 73, 0.85)
+      );
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.75);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .school-name {
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .school-motto {
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    .hud-line {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.9;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: 3px 9px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.95);
+      font-size: 0.7rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+
+    .badge-secondary-dot {
+      background: var(--secondary);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.9);
+    }
+
+    .badge-danger-dot {
+      background: var(--danger);
+      box-shadow: 0 0 12px rgba(248, 113, 113, 0.9);
+    }
+
+    main {
+      flex: 1;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.3fr);
+      gap: 18px;
+    }
+
+    /* LEFT PANEL: MAP WINDOW / COORDS */
+    .panel {
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      box-shadow: var(--shadow-strong);
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 0;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .panel-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+    }
+
+    .panel-chip {
+      font-size: 0.7rem;
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      color: var(--text-soft);
+    }
+
+    .panel-chip-hot {
+      border-color: rgba(250, 204, 21, 0.8);
+      color: var(--accent);
+    }
+
+    .panel-chip-live {
+      border-color: rgba(34, 197, 94, 0.8);
+      color: var(--secondary);
+    }
+
+    .map-shell {
+      border-radius: 14px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      overflow: hidden;
+      background: radial-gradient(
+        circle at top left,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.9),
+        #020617
+      );
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      min-height: 220px;
+    }
+
+    .map-shell iframe {
+      width: 100%;
+      height: 260px;
+      border: 0;
+      display: block;
+    }
+
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: 14px;
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .map-meta {
+      padding: 8px 10px;
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border-top: 1px solid rgba(15, 23, 42, 0.9);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.96)
+      );
+    }
+
+    .coords {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .coords span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-size: 0.65rem;
+      color: var(--text-soft);
+    }
+
+    .coords span.value {
+      font-size: 0.75rem;
+    }
+
+    .flight-tag {
+      font-size: 0.7rem;
+      text-align: right;
+      color: var(--text-soft);
+    }
+
+    .panel-footer-note {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+
+    /* RIGHT PANEL: ALUMNI TROPHY CABINET */
+    .cabinet-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cabinet-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .cabinet-title-main {
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .cabinet-title-sub {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .cabinet-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 5px 11px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.98);
+      color: var(--text-soft);
+      font-size: 0.74rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.12s ease-out;
+    }
+
+    .btn span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .btn-primary {
+      border-color: rgba(250, 204, 21, 0.9);
+      color: var(--accent);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.75);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    .cabinet-body {
+      margin-top: 8px;
+      flex: 1;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .tile {
+      border-radius: 14px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(
+        circle at top left,
+        rgba(15, 23, 42, 0.98),
+        rgba(15, 23, 42, 0.94),
+        rgba(15, 23, 42, 0.95)
+      );
+      padding: 10px 11px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      pointer-events: none;
+    }
+
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tile-school-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
+
+    .tile-year {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+    }
+
+    .tile-name {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .tile-business {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .tile-meta-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      flex-wrap: wrap;
+    }
+
+    .tile-link a {
+      color: var(--secondary);
+      text-decoration: none;
+    }
+
+    .tile-link a:hover {
+      text-decoration: underline;
+    }
+
+    .tile-qr {
+      margin-top: 4px;
+      border-radius: 10px;
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      padding: 6px;
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .tile-qr-box {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      opacity: 0.8;
+    }
+
+    .tile-status {
+      font-size: 0.7rem;
+      color: var(--secondary);
+    }
+
+    .panel-footer {
+      font-size: 0.7rem;
+      color: var(--text-soft);
+      border-top: 1px dashed rgba(31, 41, 55, 0.9);
+      padding-top: 6px;
+      margin-top: 4px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        align-items: flex-start;
+      }
+      .header-right {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <div class="school-name">Booker T. Washington High School</div>
+      <div class="school-motto">We Lead, Others Follow</div>
+    </div>
+    <div class="header-right">
+      <div class="hud-line">
+        MEMPHIS DC · ALUMNI WEBTOWER · FLIGHTLINE GRID ONLINE
+      </div>
+      <div class="badge-row">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Alumni Cabinet Live</span>
+        </div>
+        <div class="badge">
+          <span class="badge-secondary-dot badge-dot"></span>
+          <span>Map Pin Armed</span>
+        </div>
+        <div class="badge">
+          <span class="badge-danger-dot badge-dot"></span>
+          <span>No Logins · Read-Only Surface</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- LEFT: MAP WINDOW -->
+    <section class="panel">
+      <div class="panel-header">
+        <div class="panel-title">Map Window · Memphis DC</div>
+        <div class="panel-chip panel-chip-hot">World Position</div>
+      </div>
+
+      <div class="map-shell">
+        <!-- 🔭 Paste your real Google Maps embed for BTW here -->
+        <!-- Example (replace src URL with the school's coordinates / place ID): -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=YOUR_EMBED_CODE_HERE"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="map-overlay"></div>
+      </div>
+
+      <div class="map-meta">
+        <div class="coords">
+          <span class="label">Coordinates</span>
+          <!-- Replace with the real lat / lng for BTW -->
+          <span class="value" id="coordsValue">
+            LAT: 35.0000° N · LNG: 90.0000° W
+          </span>
+        </div>
+        <div class="flight-tag">
+          PLOT: BTW-01 · GRID: MEMPHIS-DC · LAYER: ALUMNI-BUSINESS
+        </div>
+      </div>
+
+      <div class="panel-footer-note">
+        This map window anchors Booker T. Washington's alumni cabinet inside
+        Memphis DC. Each alumni business tile on the right represents a live
+        economic pin tied to this school.
+      </div>
+    </section>
+
+    <!-- RIGHT: ALUMNI TROPHY CABINET -->
+    <section class="panel">
+      <div class="cabinet-header">
+        <div class="cabinet-title-block">
+          <div class="cabinet-title-main">Alumni Business Cabinet</div>
+          <div class="cabinet-title-sub">
+            A live trophy case of BTW alumni — CEOs, founders, and builders —
+            mapped into the FlightLine.
+          </div>
+        </div>
+        <div class="cabinet-controls">
+          <!-- This button is informational right now; forms can be wired later -->
+          <button class="btn btn-primary" type="button">
+            <span class="dot"></span>
+            Submit Alumni Business
+          </button>
+          <button class="btn" type="button">
+            Download Roster (CSV)
+          </button>
+        </div>
+      </div>
+
+      <div class="cabinet-body">
+        <!-- 🏆 SAMPLE TILE 1 -->
+        <article class="tile">
+          <div class="tile-header">
+            <div class="tile-school-tag">BTW · CLASS OF 2005</div>
+            <div class="tile-year">PIN: BTW-ALUM-001</div>
+          </div>
+          <div class="tile-name">Jordan Mitchell</div>
+          <div class="tile-business">Founder · Mitchell Creative Studios</div>
+          <div class="tile-meta-row">
+            <div>Industry: Design & Branding</div>
+            <div class="tile-link">
+              <a href="https://example.com" target="_blank" rel="noopener">
+                Visit Website
+              </a>
+            </div>
+          </div>
+          <div class="tile-qr">
+            <div class="tile-qr-box">QR</div>
+            <div class="tile-status">
+              Status: Active · Verified BTW Alumni
+            </div>
+          </div>
+        </article>
+
+        <!-- 🏆 SAMPLE TILE 2 -->
+        <article class="tile">
+          <div class="tile-header">
+            <div class="tile-school-tag">BTW · CLASS OF 2012</div>
+            <div class="tile-year">PIN: BTW-ALUM-002</div>
+          </div>
+          <div class="tile-name">Aaliyah Carter</div>
+          <div class="tile-business">Owner · Carter Family Logistics</div>
+          <div class="tile-meta-row">
+            <div>Industry: Transportation & Delivery</div>
+            <div class="tile-link">
+              <a href="#" target="_blank" rel="noopener">
+                Coming Soon
+              </a>
+            </div>
+          </div>
+          <div class="tile-qr">
+            <div class="tile-qr-box">QR</div>
+            <div class="tile-status">
+              Status: Pending · Awaiting QR / Link
+            </div>
+          </div>
+        </article>
+
+        <!-- 🏆 SAMPLE TILE 3 -->
+        <article class="tile">
+          <div class="tile-header">
+            <div class="tile-school-tag">BTW · CLASS OF 1998</div>
+            <div class="tile-year">PIN: BTW-ALUM-003</div>
+          </div>
+          <div class="tile-name">Marcus Lee</div>
+          <div class="tile-business">CEO · Lee Construction & Restoration</div>
+          <div class="tile-meta-row">
+            <div>Industry: Construction</div>
+            <div class="tile-link">
+              <a href="#" target="_blank" rel="noopener">
+                Add Contact
+              </a>
+            </div>
+          </div>
+          <div class="tile-qr">
+            <div class="tile-qr-box">QR</div>
+            <div class="tile-status">
+              Status: Draft · Needs Verification
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="panel-footer">
+        <span>
+          This WebTower is a public, read-only surface. Alumni can be added or
+          updated upstream via FlightLine forms, Sheets, and QR-based proof.
+        </span>
+        <span>
+          Powered by Memphis DC · FlightLine Architecture · WebTower Pattern v1.
+        </span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
