@@ -2,48 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Booker T. Washington WebTower | Memphis DC Alumni Grid</title>
 
-  <!-- Outernet metadata -->
-  <meta
-    name="description"
-    content="Booker T. Washington Alumni WebTower — a FlightLine Memphis DC Outernet node where BTW alumni register their businesses, lock in their zip codes, and appear on the citywide alumni grid."
-  />
+  <meta name="description"
+    content="Booker T. Washington Alumni WebTower — a FlightLine Memphis DC Outernet node where BTW alumni register their businesses, lock in their zip codes, and appear on the citywide alumni grid." />
+
   <meta name="theme-color" content="#0B3D24" />
 
   <style>
     :root {
       --bg: #020617;
-      --bg-alt: #020617;
       --panel: #020617;
-      --glass: rgba(11, 61, 36, 0.92); /* hunter green glass */
+      --glass: rgba(11, 61, 36, 0.92); 
       --border: #1f2937;
-
-      --accent: #0B3D24; /* hunter green */
+      --accent: #0B3D24;
       --accent-soft: rgba(11, 61, 36, 0.18);
-
-      --accent-gold: #C5A100; /* old gold */
-      --accent-red: #C5716D;
-
+      --accent-gold: #C5A100;
       --text: #e5e7eb;
       --text-soft: #9ca3af;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, #0b1120, #020617 55%, #000 100%);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120, #020617 55%, #000 100%);
       color: var(--text);
       display: flex;
       flex-direction: column;
@@ -57,87 +43,44 @@
       justify-content: space-between;
       gap: 18px;
       backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to right,
-        rgba(11, 61, 36, 0.96),
-        rgba(11, 61, 36, 0.85)
-      );
+      background: linear-gradient(to right, rgba(11, 61, 36, 0.96), rgba(11, 61, 36, 0.85));
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
-    .brand-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: baseline;
-    }
+    .brand-block { display: flex; flex-direction: column; gap: 4px; }
+    .brand-line { display: flex; flex-wrap: wrap; gap: 10px; align-items: baseline; }
 
     .brand-school {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      font-size: 1.1rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
       color: var(--accent-gold);
     }
 
     .brand-city {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-soft);
+      font-size: 0.9rem; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--text-soft);
     }
 
-    .brand-motto {
-      font-size: 0.8rem;
-      font-style: italic;
-      color: var(--accent-gold);
-    }
+    .brand-motto { font-size: 0.8rem; font-style: italic; color: var(--accent-gold); }
 
-    .header-hud {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
+    .header-hud { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
-    .hud-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: flex-end;
-    }
+    .hud-line { display: flex; align-items: center; gap: 8px; }
 
     .hud-pill {
       border-radius: 999px;
       border: 1px solid var(--border);
       padding: 4px 10px;
       background: rgba(11, 61, 36, 0.95);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-flex; gap: 6px;
     }
 
     .hud-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
+      width: 8px; height: 8px; border-radius: 999px;
       background: var(--accent-gold);
       box-shadow: 0 0 12px rgba(197, 161, 0, 0.9);
-    }
-
-    .hud-pill span.label {
-      color: var(--text-soft);
     }
 
     main {
@@ -151,44 +94,27 @@
     .panel {
       border-radius: 20px;
       border: 1px solid var(--border);
-      background:
+      background: 
         radial-gradient(circle at top left, rgba(197, 161, 0, 0.13), transparent 55%),
         radial-gradient(circle at bottom right, rgba(11, 61, 36, 0.25), transparent 55%),
         var(--glass);
       box-shadow:
-        0 22px 45px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(11, 61, 36, 0.9);
-      padding: 16px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      min-height: 0;
+        0 22px 45px rgba(0,0,0,0.7),
+        0 0 0 1px rgba(11,61,36,0.9);
+      padding: 16px 18px;
+      display: flex; flex-direction: column; gap: 14px;
     }
 
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
+    .panel-header { display: flex; justify-content: space-between; gap: 10px; }
 
-    .panel-title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
+    .panel-title-block { display: flex; flex-direction: column; gap: 2px; }
 
     .panel-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-soft);
+      font-size: 0.9rem; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--text-soft);
     }
 
-    .panel-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
+    .panel-subtitle { font-size: 0.8rem; color: var(--text-soft); }
 
     .panel-tag {
       font-size: 0.7rem;
@@ -197,234 +123,207 @@
       border: 1px solid rgba(197, 161, 0, 0.75);
       color: var(--accent-gold);
       background: rgba(11, 61, 36, 0.5);
-      text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 
     .panel-body {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      line-height: 1.6;
-      overflow-y: auto;
-      padding-right: 4px;
+      font-size: 0.85rem; color: var(--text-soft);
+      line-height: 1.6; overflow-y: auto;
     }
 
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 
     .badge {
       border-radius: 999px;
       border: 1px solid var(--border);
       padding: 3px 8px;
+      background: rgba(11, 61, 36, 0.90);
+      display: inline-flex; align-items: center; gap: 6px;
       font-size: 0.72rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(11, 61, 36, 0.9);
     }
 
     .badge-dot {
-      width: 7px;
-      height: 7px;
+      width: 7px; height: 7px;
       border-radius: 999px;
       background: var(--accent-soft);
     }
 
-    .badge-gold {
-      border-color: rgba(197, 161, 0, 0.75);
-      color: var(--accent-gold);
-    }
+    .badge-gold { border-color: rgba(197,161,0,0.75); color: var(--accent-gold); }
 
-    .badge-blue {
-      border-color: rgba(11, 61, 36, 0.75);
-      color: var(--accent);
-    }
-
-    .btn-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
+    .btn-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
 
     .btn {
       border-radius: 999px;
       border: 1px solid var(--border);
       padding: 7px 14px;
-      font-size: 0.78rem;
       background: rgba(11, 61, 36, 0.98);
       color: var(--text);
+      display: inline-flex; align-items: center; gap: 8px;
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.15s ease-out;
+      font-size: 0.78rem;
+      transition: 0.15s;
     }
 
     .btn-primary {
       border-color: rgba(197, 161, 0, 0.85);
       background: radial-gradient(circle at top, #C5A100, #7A6200);
       color: #0B3D24;
-      box-shadow: 0 0 20px rgba(197, 161, 0, 0.5);
+      box-shadow: 0 0 20px rgba(197,161,0,0.5);
     }
 
     .map-frame-wrap {
       flex: 1;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(11, 61, 36, 0.9);
-      box-shadow:
-        0 16px 35px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(11, 61, 36, 0.9);
-      background: #020617;
+      border: 1px solid rgba(11,61,36,0.9);
+      box-shadow: 
+        0 16px 35px rgba(0,0,0,0.8),
+        0 0 0 1px rgba(11,61,36,0.9);
     }
 
-    .map-frame {
-      width: 100%;
-      height: 100%;
-      min-height: 320px;
-      border: 0;
-    }
+    .map-frame { width: 100%; height: 100%; min-height: 320px; border: 0; }
 
     .footer-strip {
       margin: 0 18px 16px;
       border-radius: 16px;
       border: 1px dashed rgba(55, 65, 81, 0.9);
       background:
-        radial-gradient(circle at left, rgba(197, 161, 0, 0.18), transparent 55%),
-        rgba(11, 61, 36, 0.95);
+        radial-gradient(circle at left, rgba(197,161,0,0.18), transparent 55%),
+        rgba(11,61,36,0.95);
       padding: 10px 14px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
       font-size: 0.78rem;
+      display: flex; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
       color: var(--text-soft);
     }
 
-    .footer-strip strong {
-      color: var(--accent-gold);
-    }
+    .footer-strip strong { color: var(--accent-gold); }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="brand-block">
-      <div class="brand-line">
-        <div class="brand-school">Booker T. Washington High School</div>
-        <div class="brand-city">Memphis DC · Outernet Alumni Node</div>
-      </div>
-      <div class="brand-motto">“We Lead, Others Follow”</div>
+<header>
+  <div class="brand-block">
+    <div class="brand-line">
+      <div class="brand-school">Booker T. Washington High School</div>
+      <div class="brand-city">Memphis DC · Outernet Alumni Node</div>
     </div>
-
-    <div class="header-hud">
-      <div class="hud-line">
-        <div class="hud-pill">
-          <span class="hud-dot"></span>
-          <span class="label">ALUMNI BUSINESS GRID · LIVE</span>
-        </div>
-      </div>
-      <div class="hud-line">
-        <span>🎓 CITYWIDE TRACK:</span>
-        <span>BTW · Mitchell · Carver · Melrose · Central · Hamilton · + more</span>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- Left panel -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title-block">
-          <div class="panel-title">Alumni Trophy Cabinet</div>
-          <div class="panel-subtitle">
-            BTW graduates lock in their businesses and zip codes into the Memphis DC grid.
-          </div>
-        </div>
-        <div class="panel-tag">WebTower · BTW</div>
-      </div>
-
-      <div class="panel-body">
-        <div class="badge-row">
-          <div class="badge badge-gold">
-            <span class="badge-dot"></span>
-            <span>Memphis DC · Outernet Capital</span>
-          </div>
-          <div class="badge badge-blue">
-            <span class="badge-dot"></span>
-            <span>BTW Alumni Business Registry</span>
-          </div>
-          <div class="badge badge-soft">
-            <span class="badge-dot"></span>
-            <span>Zip-code anchored · Seat-based grid</span>
-          </div>
-        </div>
-
-        <p>
-          This WebTower is a digital trophy cabinet for
-          <strong>Booker T. Washington alumni</strong>. Every graduate who launches
-          a business or leads a craft can pin into the
-          <strong>Memphis DC Outernet map</strong>.
-        </p>
-
-        <div class="btn-row">
-          <a
-            class="btn-primary btn"
-            href="YOUR_FORM_HERE"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            📝 Add My Business
-          </a>
-
-          <a
-            class="btn"
-            href="https://taylor7617.github.io/flightline-memphisdc/#proof-stack"
-            target="_blank"
-          >
-            🛫 FlightLine Proof Stack
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Right panel -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title-block">
-          <div class="panel-title">Memphis DC Alumni Map</div>
-          <div class="panel-subtitle">
-            Every school receives a tower, a cabinet, and a seat column in this map.
-          </div>
-        </div>
-        <div class="panel-tag">Outernet Flight Map</div>
-      </div>
-
-      <div class="panel-body" style="flex: 1; display: flex; flex-direction: column;">
-        <div class="map-frame-wrap">
-          <iframe
-            class="map-frame"
-            src="YOUR_MAP_URL"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="footer-strip">
-    <span>
-      This WebTower is a <strong>BTW alumni</strong> node inside the Memphis DC Outernet.
-    </span>
-    <span>
-      Digital custody flows through Google (GI), GitHub, Stripe, and the Wolfpack Ledger.
-    </span>
+    <div class="brand-motto">“We Lead, Others Follow”</div>
   </div>
+
+  <div class="header-hud">
+    <div class="hud-line">
+      <div class="hud-pill">
+        <span class="hud-dot"></span>
+        <span class="label">ALUMNI BUSINESS GRID · LIVE</span>
+      </div>
+    </div>
+    <div class="hud-line">
+      <span>🎓 CITYWIDE TRACK:</span>
+      <span>BTW · Mitchell · Carver · Melrose · Central · Hamilton · + more</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- LEFT PANEL -->
+  <section class="panel">
+    <div class="panel-header">
+      <div class="panel-title-block">
+        <div class="panel-title">Alumni Trophy Cabinet</div>
+        <div class="panel-subtitle">
+          BTW graduates lock in their businesses & zip codes to the Memphis DC grid.
+        </div>
+      </div>
+      <div class="panel-tag">WebTower · BTW</div>
+    </div>
+
+    <div class="panel-body">
+
+      <div class="badge-row">
+        <div class="badge badge-gold">
+          <span class="badge-dot"></span> Memphis DC · Outernet Capital
+        </div>
+
+        <div class="badge badge-gold">
+          <span class="badge-dot"></span> BTW Alumni Business Registry
+        </div>
+      </div>
+
+      <p>
+        This WebTower is the official <strong>Booker T. Washington</strong> alumni
+        business registry for the Memphis DC Outernet.
+      </p>
+
+      <p>Register your business or craft here:</p>
+
+      <div class="btn-row">
+        <a
+          class="btn-primary btn"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfMZ2OgBmK40rPL_Oo-4fgFWNiyrsXqmHFbj1hz0X0NAxxNPw/viewform?usp=sharing&ouid=115160978361549729608"
+          target="_blank"
+        >
+          📝 BTW Alumni · Add My Business
+        </a>
+
+        <a class="btn"
+          href="https://taylor7617.github.io/flightline-memphisdc/#proof-stack"
+          target="_blank">
+          🛫 FlightLine Proof Stack
+        </a>
+
+        <a class="btn"
+          href="https://taylor7617.github.io/wolfpack-plantarium-museum/"
+          target="_blank">
+          🌍 Keith Ledger Registry
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- RIGHT PANEL -->
+  <section class="panel">
+    <div class="panel-header">
+      <div class="panel-title-block">
+        <div class="panel-title">Memphis DC Alumni Maps</div>
+        <div class="panel-subtitle">Active Grid + Future Alumni Grid</div>
+      </div>
+      <div class="panel-tag">Outernet Maps</div>
+    </div>
+
+    <div class="panel-body" style="flex:1; display:flex; flex-direction:column; gap:14px;">
+
+      <p><strong>Active Memphis DC Operational Map:</strong></p>
+      <div class="map-frame-wrap">
+        <iframe class="map-frame"
+          src="https://www.google.com/maps/d/u/5/edit?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI&usp=sharing"
+        ></iframe>
+      </div>
+
+      <p><strong>Future Blank Alumni Grid Map (Seats + Pins):</strong></p>
+      <div class="map-frame-wrap">
+        <iframe class="map-frame"
+          src="https://www.google.com/maps/d/u/5/edit?mid=18Yj7AtSMyKJeQjrOQoFZy_S4QtOa4VY&usp=sharing"
+        ></iframe>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="footer-strip">
+  <span>
+    This WebTower is a <strong>BTW alumni</strong> node inside the Memphis DC Outernet.
+  </span>
+  <span>
+    Digital custody flows through Google (GI), GitHub, Stripe, and Wolfpack Ledger.
+  </span>
+</div>
 
 </body>
 </html>
