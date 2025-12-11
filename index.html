@@ -1,327 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Booker T. Washington WebTower | Memphis DC Alumni Aircraft</title>
-
-  <meta name="description"
-    content="BTW WebTower — Memphis DC Operational Map and 100,000-seat Alumni Aircraft Grid. Seats, not pins. Alumni register their businesses and claim official positions inside the Memphis DC Outernet." />
-
-  <meta name="theme-color" content="#0B3D24" />
-
-  <style>
-    :root {
-      --bg: #020617;
-      --panel: #020617;
-      --glass: rgba(11, 61, 36, 0.92);
-      --border: #1f2937;
-
-      --accent: #0B3D24; /* hunter green */
-      --accent-soft: rgba(11,61,36,0.18);
-      --accent-gold: #C5A100; /* old gold */
-
-      --text: #e5e7eb;
-      --text-soft: #9ca3af;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120, #020617 55%, #000 100%);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      padding: 18px 24px 14px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      backdrop-filter: blur(16px);
-      background: linear-gradient(to right,
-        rgba(11,61,36,0.96),
-        rgba(11,61,36,0.85)
-      );
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .brand-block { display:flex; flex-direction:column; gap:4px; }
-
-    .brand-line { display:flex; gap:10px; align-items:baseline; flex-wrap:wrap; }
-
-    .brand-school {
-      font-size:1.1rem;
-      font-weight:700;
-      letter-spacing:0.06em;
-      text-transform:uppercase;
-      color:var(--accent-gold);
-    }
-
-    .brand-city {
-      font-size:0.9rem;
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-      color:var(--text-soft);
-    }
-
-    .brand-motto {
-      font-size:0.8rem;
-      font-style:italic;
-      color:var(--accent-gold);
-    }
-
-    .header-hud { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
-
-    .hud-line { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
-
-    .hud-pill {
-      border-radius:999px;
-      border:1px solid var(--border);
-      padding:4px 10px;
-      display:flex;
-      gap:6px; align-items:center;
-      background:rgba(11,61,36,0.95);
-    }
-
-    .hud-dot {
-      width:8px; height:8px;
-      background:var(--accent-gold);
-      border-radius:999px;
-      box-shadow:0 0 12px rgba(197,161,0,0.9);
-    }
-
-    main {
-      flex:1;
-      padding:18px;
-      display:grid;
-      grid-template-columns:minmax(0,1.1fr) minmax(0,1.4fr);
-      gap:18px;
-    }
-
-    .panel {
-      border-radius:20px;
-      border:1px solid var(--border);
-      background:
-        radial-gradient(circle at top left, rgba(197,161,0,0.15), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(11,61,36,0.3), transparent 55%),
-        var(--glass);
-      padding:16px 18px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-      box-shadow:
-        0 22px 45px rgba(0,0,0,0.75),
-        inset 0 0 0 1px rgba(11,61,36,0.8);
-    }
-
-    .panel-header {
-      display:flex; justify-content:space-between;
-      gap:10px; align-items:flex-start;
-    }
-
-    .panel-title-block { display:flex; flex-direction:column; gap:2px; }
-
-    .panel-title {
-      font-size:0.9rem;
-      letter-spacing:0.14em;
-      text-transform:uppercase;
-      color:var(--text-soft);
-    }
-
-    .panel-subtitle {
-      font-size:0.8rem; color:var(--text-soft);
-    }
-
-    .panel-tag {
-      padding:3px 9px;
-      border:1px solid rgba(197,161,0,0.75);
-      color:var(--accent-gold);
-      background:rgba(11,61,36,0.5);
-      border-radius:999px;
-      font-size:0.7rem;
-      letter-spacing:0.12em;
-    }
-
-    .panel-body {
-      font-size:0.85rem;
-      line-height:1.6;
-      color:var(--text-soft);
-      overflow-y:auto;
-      padding-right:4px;
-      flex:1;
-    }
-
-    .map-frame-wrap {
-      flex:1;
-      border-radius:16px;
-      overflow:hidden;
-      border:1px solid rgba(11,61,36,0.9);
-      box-shadow:
-        0 16px 35px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(11,61,36,0.9);
-    }
-
-    .map-frame { width:100%; height:100%; min-height:320px; border:0; }
-
-    .btn-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
-
-    .btn {
-      border-radius:999px;
-      border:1px solid var(--border);
-      padding:7px 14px;
-      display:flex; align-items:center; gap:8px;
-      text-decoration:none;
-      color:var(--text);
-      background:rgba(11,61,36,0.95);
-      font-size:0.78rem;
-    }
-
-    .btn-primary {
-      background: radial-gradient(circle at top, #C5A100, #7A6200);
-      border-color: rgba(197,161,0,0.85);
-      color: #0B3D24;
-      box-shadow: 0 0 20px rgba(197,161,0,0.5);
-    }
-
-    .footer-strip {
-      margin: 0 18px 16px;
-      padding: 10px 14px;
-      background:
-        radial-gradient(circle at left, rgba(197,161,0,0.15), transparent 55%),
-        rgba(11,61,36,0.95);
-      border-radius:16px;
-      border:1px dashed rgba(55,65,81,0.9);
-      display:flex; justify-content:space-between;
-      flex-wrap:wrap; gap:12px;
-      font-size:0.78rem;
-      color:var(--text-soft);
-    }
-
-    .footer-strip strong { color:var(--accent-gold); }
-
-    @media(max-width:980px){
-      main{ grid-template-columns:1fr; }
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BTW Warriors WebTower | Memphis DC Outernet Node</title>
+<meta name="description" content="BTW Warriors Alumni WebTower · Memphis DC Outernet Grid · Warrior-Class Seat Registry.">
+<style>
+:root{
+ --green:#0b3d2e;--gold:#facc15;--soft:rgba(250,204,21,.15);
+ --text:#e5e7eb;--soft-text:#9ca3af;--bg:#020b06;--glass:rgba(0,0,0,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+ font-family:system-ui,Segoe UI,sans-serif;background:var(--bg) url('https://i.imgur.com/bE2i2Q8.png') center/cover fixed;
+ color:var(--text);min-height:100vh;display:flex;flex-direction:column;
+}
+header{
+ padding:16px 22px;border-bottom:1px solid #0f1a13;
+ background:linear-gradient(90deg,var(--green),#03150f);backdrop-filter:blur(12px);
+ display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.h1{font-size:1.2rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);}
+.h2{font-size:.85rem;color:var(--soft-text);letter-spacing:.15em;text-transform:uppercase;}
+.motto{font-size:.8rem;font-style:italic;color:var(--gold);}
+.pill{border:1px solid var(--gold);border-radius:999px;padding:4px 10px;
+ background:rgba(0,0,0,.3);font-size:.75rem;display:flex;align-items:center;gap:6px;}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);}
+main{
+ flex:1;display:grid;grid-template-columns:minmax(0,1.1fr)minmax(0,1.4fr);
+ gap:16px;padding:18px;
+}
+.panel{
+ border:1px solid #173526;border-radius:16px;padding:16px;
+ background:linear-gradient(140deg,rgba(11,61,46,.4),rgba(0,0,0,.65));
+ box-shadow:0 14px 30px rgba(0,0,0,.6);display:flex;flex-direction:column;gap:14px;
+}
+.title{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft-text);}
+.subtitle{font-size:.78rem;color:var(--soft-text);}
+.tag{
+ border:1px solid var(--gold);padding:3px 8px;border-radius:999px;font-size:.65rem;
+ letter-spacing:.15em;color:var(--gold);text-transform:uppercase;
+}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px;}
+.btn{
+ border:1px solid var(--gold);border-radius:999px;padding:8px 14px;
+ font-size:.78rem;text-decoration:none;color:#000;font-weight:600;
+ background:var(--gold);transition:.2s;cursor:pointer;
+}
+.btn:hover{background:var(--soft);color:var(--gold);transform:translateY(-1px);}
+.btn.active{background:#05271c;color:var(--gold);border-color:var(--gold);box-shadow:0 0 14px var(--gold);}
+iframe{width:100%;height:100%;border:0;}
+.map-window{flex:1;min-height:340px;border-radius:14px;overflow:hidden;
+ border:1px solid #0f1a13;box-shadow:0 10px 25px rgba(0,0,0,.7);}
+.footer{
+ padding:12px 16px;font-size:.76rem;border-top:1px solid #0f1a13;
+ background:rgba(0,20,10,.7);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+@media(max-width:900px){main{grid-template-columns:1fr;}}
+</style>
 </head>
-
 <body>
 
 <header>
-  <div class="brand-block">
-    <div class="brand-line">
-      <div class="brand-school">Booker T. Washington High School</div>
-      <div class="brand-city">Memphis DC · Outernet Grid</div>
-    </div>
-    <div class="brand-motto">“We Lead, Others Follow.”</div>
-  </div>
-
-  <div class="header-hud">
-    <div class="hud-line">
-      <div class="hud-pill">
-        <span class="hud-dot"></span>
-        <span>BTW ALUMNI AIRCRAFT · 100,000 SEATS</span>
-      </div>
-    </div>
-    <div class="hud-line">
-      LIVE COUNT →
-      <span style="color:#C5A100;">Occupied:</span> 0
-      <span style="color:#C5A100;">Open:</span> 100,000
-    </div>
-  </div>
+ <div>
+  <div class="h1">Booker T. Washington High School — WARRIORS</div>
+  <div class="h2">Memphis DC · Outernet Node</div>
+  <div class="motto">"We Lead, Others Follow"</div>
+ </div>
+ <div class="pill"><span class="dot"></span>ALUMNI BUSINESS GRID · LIVE</div>
 </header>
 
 <main>
+ <!-- Left Panel -->
+ <section class="panel">
+  <div>
+   <div class="title">Alumni Trophy Cabinet</div>
+   <div class="subtitle">BTW Warriors register their seats inside the Memphis DC Outernet grid.</div>
+  </div>
 
-  <!-- LEFT PANEL -->
-  <section class="panel">
-    <div class="panel-header">
-      <div class="panel-title-block">
-        <div class="panel-title">BTW Alumni Registration</div>
-        <div class="panel-subtitle">Seats, not pins.</div>
-      </div>
-      <div class="panel-tag">WebTower · BTW</div>
-    </div>
+  <p>Every Warrior who owns a business, runs a craft, or leads a lane can claim their seat on the <strong>100,000-seat aircraft</strong> inside Memphis DC.</p>
 
-    <div class="panel-body">
+  <ul style="font-size:.82rem;color:var(--soft-text);margin-left:18px;line-height:1.5;">
+   <li>Name & graduating class</li>
+   <li>Business or craft lane</li>
+   <li>Primary service zip code</li>
+   <li>Website / Linktree / social link</li>
+  </ul>
 
-      <p>
-        BTW Alumni register their business, craft, or professional lane to claim a
-        <strong>seat</strong> inside the official 100,000-seat Alumni Aircraft.
-      </p>
+  <div class="btn-row">
+   <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfMZ2OgBmK40rPL_Oo-4fgFWNiyrsXqmHFbj1hz0X0NAxxNPw/viewform?usp=sharing" target="_blank">ADD MY BUSINESS</a>
+   <a class="btn" href="https://taylor7617.github.io/flightline-memphisdc/#proof-stack" target="_blank">OPEN PROOF STACK</a>
+  </div>
+ </section>
 
-      <p>
-        Seats remain empty until filled by alumni.  
-        Open space = discipline.  
-        Order = movement.
-      </p>
+ <!-- Right Panel -->
+ <section class="panel">
+  <div>
+   <div class="title">Memphis DC Warrior Grid</div>
+   <div class="subtitle">Switch between the ACTIVE CITY GRID and the BTW AIRCRAFT GRID.</div>
+  </div>
 
-      <div class="btn-row">
-        <a class="btn btn-primary"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSfMZ2OgBmK40rPL_Oo-4fgFWNiyrsXqmHFbj1hz0X0NAxxNPw/viewform"
-          target="_blank">
-          📝 Add My Business (BTW Alumni Form)
-        </a>
+  <div class="btn-row">
+   <button id="btnA" class="btn active">OPEN GRID “B10”</button>
+   <button id="btnB" class="btn">SEAT “2C”</button>
+  </div>
 
-        <a class="btn"
-          href="https://taylor7617.github.io/flightline-memphisdc/"
-          target="_blank">
-          🛫 Memphis DC Home Base
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- RIGHT PANEL -->
-  <section class="panel">
-
-    <div class="panel-header">
-      <div class="panel-title-block">
-        <div class="panel-title">Memphis DC Airspace</div>
-        <div class="panel-subtitle">Operational & Alumni Maps</div>
-      </div>
-      <div class="panel-tag">Outernet</div>
-    </div>
-
-    <div class="panel-body" style="display:flex; flex-direction:column; gap:16px;">
-
-      <p><strong>ACTIVE MEMPHIS DC OPERATIONAL GRID:</strong></p>
-
-      <div class="map-frame-wrap">
-        <iframe
-          class="map-frame"
-          src="https://www.google.com/maps/d/u/5/edit?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI&usp=sharing"
-          loading="lazy"></iframe>
-      </div>
-
-      <p><strong>BTW ALUMNI AIRCRAFT — 100,000 SEATS:</strong></p>
-
-      <div class="map-frame-wrap">
-        <iframe
-          class="map-frame"
-          src="https://www.google.com/maps/d/u/5/edit?mid=18Yj7AtSMyKJeQjrOQoFZy_S4QtOa4VY&usp=sharing"
-          loading="lazy"></iframe>
-      </div>
-
-    </div>
-  </section>
-
+  <div class="map-window">
+   <iframe id="mapFrame"
+    src="https://www.google.com/maps/d/u/5/edit?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI&usp=sharing"
+    allowfullscreen loading="lazy"></iframe>
+  </div>
+ </section>
 </main>
 
-<div class="footer-strip">
-  <span>BTW WebTower — Memphis DC Outernet</span>
-  <span><strong>Seats Not Pins</strong> · 100,000 Capacity Aircraft</span>
+<div class="footer">
+ <span>BTW Warriors WebTower · Memphis DC Outernet</span>
+ <span>Custody via Google ID · Registry via Keith Ledger</span>
 </div>
+
+<script>
+const m=document.getElementById('mapFrame'),
+ bA=document.getElementById('btnA'),
+ bB=document.getElementById('btnB');
+
+bA.onclick=()=>{m.src="https://www.google.com/maps/d/u/5/edit?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI&usp=sharing";
+ bA.classList.add("active");bB.classList.remove("active");};
+
+bB.onclick=()=>{m.src="https://www.google.com/maps/d/u/5/edit?mid=18Yj7AtSMyKJeQjrOQoFZy_S4QtOa4VY&usp=sharing";
+ bB.classList.add("active");bA.classList.remove("active");};
+</script>
+
+</body>
+</html>
+
 
 </body>
 </html>
