@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-school="Booker T. Washington HS – Warriors">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
-  <title>Booker T. Washington WebTower | Memphis DC Alumni Grid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Outernet metadata -->
-  <meta
-    name="description"
-    content="Booker T. Washington Alumni WebTower — a FlightLine Memphis DC Outernet node where BTW alumni register their businesses, lock in their zip codes, and appear on the citywide alumni grid."
-  />
-  <meta name="theme-color" content="#020617" />
+  <title>BTW WebTower | Warriors • FlightLine Memphis DC</title>
+  <meta name="description" content="BTW Warriors WebTower — Memphis DC FlightLine Gate 3–5. Alumni Aircraft Seat Map (2C). Memphis DC Operational Grid (B10). Built on Mycelium901 infrastructure." />
 
+  <!-- ============================== -->
+  <!--  HUNTER GREEN BTW THEME       -->
+  <!-- ============================== -->
   <style>
     :root {
-      --bg: #020617;
-      --bg-alt: #020617;
-      --panel: #020617;
-      --glass: rgba(15, 23, 42, 0.92);
-      --border: #1f2937;
-      --accent: #38bdf8; /* sky blue */
+      --bg: #032d19;
+      --bg-alt: #032d19;
+      --panel: #032d19;
+      --glass: rgba(5, 74, 41, 0.65);
+      --border: #054a29;
+      --accent: #38bdf8;
       --accent-soft: rgba(56, 189, 248, 0.12);
       --accent-gold: #facc15;
       --accent-red: #f97373;
       --text: #e5e7eb;
       --text-soft: #9ca3af;
-    }
 
-    * {
-      box-sizing: border-box;
+      /* BTW Warrior Greens */
+      --hunter: #054a29;
+      --hunter-dark: #032d19;
+      --hunter-glass: rgba(5, 74, 41, 0.65);
+      --hunter-fade: rgba(5, 74, 41, 0.35);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top, #0b1120, #020617 55%, #000 100%);
+        radial-gradient(circle at top, var(--hunter-dark), var(--hunter) 55%, #000 100%),
+        url('https://i.ibb.co/ZVtqVQB/spartan-helmet-green.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-blend-mode: overlay;
       color: var(--text);
       display: flex;
       flex-direction: column;
@@ -52,486 +52,206 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
       backdrop-filter: blur(16px);
-      background: linear-gradient(
-        to right,
-        rgba(15, 23, 42, 0.96),
-        rgba(8, 47, 73, 0.9)
-      );
+      background: linear-gradient(to right, rgba(3,45,25,0.96), rgba(5,74,41,0.9));
       position: sticky;
       top: 0;
       z-index: 10;
     }
 
-    .brand-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: baseline;
-    }
-
-    .brand-school {
-      font-size: 1.1rem;
+    .brand {
+      font-size: 1.45rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: var(--accent-gold);
     }
 
-    .brand-city {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-soft);
-    }
-
-    .brand-motto {
-      font-size: 0.8rem;
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .header-hud {
+    .content {
+      max-width: 1050px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 18px;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 6px;
-      font-size: 0.78rem;
-      color: var(--text-soft);
-    }
-
-    .hud-line {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .hud-pill {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      background: rgba(15, 23, 42, 0.95);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .hud-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
-    }
-
-    .hud-pill span.label {
-      color: var(--text-soft);
-    }
-
-    main {
-      flex: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
-      gap: 18px;
-      padding: 18px;
+      gap: 32px;
     }
 
     .panel {
       border-radius: 20px;
       border: 1px solid var(--border);
-      background: radial-gradient(
-          circle at top left,
-          rgba(30, 64, 175, 0.5),
-          transparent 55%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          rgba(56, 189, 248, 0.35),
-          transparent 55%
-        ),
-        var(--glass);
+      background:
+        radial-gradient(circle at top left, var(--hunter-fade), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(56,189,248,0.25), transparent 55%),
+        var(--hunter-glass);
       box-shadow:
         0 22px 45px rgba(0, 0, 0, 0.7),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-      padding: 16px 18px 16px;
+        0 0 0 1px rgba(5, 74, 41, 0.9);
+      padding: 20px 22px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      min-height: 0;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-    }
-
-    .panel-title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+      gap: 16px;
     }
 
     .panel-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--text-soft);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-gold);
     }
 
     .panel-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-soft);
-    }
-
-    .panel-tag {
-      font-size: 0.7rem;
-      border-radius: 999px;
-      padding: 3px 9px;
-      border: 1px solid rgba(250, 204, 21, 0.75);
-      color: var(--accent-gold);
-      background: rgba(23, 23, 23, 0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .panel-body {
-      font-size: 0.85rem;
-      color: var(--text-soft);
-      line-height: 1.6;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .panel-body p {
-      margin: 0 0 10px;
-    }
-
-    .panel-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .badge {
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 3px 8px;
-      font-size: 0.72rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-    }
-
-    .badge-gold {
-      border-color: rgba(250, 204, 21, 0.6);
-      color: var(--accent-gold);
-    }
-
-    .badge-blue {
-      border-color: rgba(56, 189, 248, 0.7);
-      color: var(--accent);
-    }
-
-    .badge-soft {
+      font-size: 0.9rem;
       color: var(--text-soft);
     }
 
     .btn-row {
       display: flex;
+      gap: 12px;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
     }
 
     .btn {
       border-radius: 999px;
       border: 1px solid var(--border);
-      padding: 7px 14px;
-      font-size: 0.78rem;
-      background: rgba(15, 23, 42, 0.98);
+      padding: 9px 18px;
+      font-size: 0.82rem;
+      background: var(--hunter-dark);
       color: var(--text);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
       cursor: pointer;
-      transition: all 0.15s ease-out;
-      white-space: nowrap;
+      transition: 0.15s ease-out;
     }
-
-    .btn span.icon {
-      font-size: 0.95rem;
-    }
-
-    .btn-primary {
-      border-color: rgba(56, 189, 248, 0.85);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    .btn:hover {
+      transform: translateY(-2px);
+      background: radial-gradient(circle at top, var(--hunter-fade), transparent 60%), var(--hunter-dark);
+      box-shadow:
+        0 14px 28px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(56,189,248,0.4);
     }
 
     .btn-gold {
-      border-color: rgba(250, 204, 21, 0.75);
+      border-color: var(--accent-gold);
       color: var(--accent-gold);
     }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.75),
-        0 0 0 1px rgba(56, 189, 248, 0.4);
-      background: radial-gradient(
-          circle at top,
-          rgba(56, 189, 248, 0.15),
-          transparent 60%
-        ),
-        rgba(15, 23, 42, 0.98);
+    .btn-primary {
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .map-frame-wrap {
-      flex: 1;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--hunter);
       box-shadow:
         0 16px 35px rgba(0, 0, 0, 0.8),
-        0 0 0 1px rgba(15, 23, 42, 0.9);
-      background: #020617;
+        0 0 0 1px rgba(5, 74, 41, 0.9);
+      background: var(--hunter-dark);
+      height: 520px;
     }
 
     .map-frame {
       width: 100%;
       height: 100%;
-      min-height: 320px;
-      border: 0;
+      border: none;
     }
 
-    .footer-strip {
-      margin: 0 18px 16px;
-      border-radius: 16px;
-      border: 1px dashed rgba(55, 65, 81, 0.9);
-      background: radial-gradient(
-          circle at left,
-          rgba(56, 189, 248, 0.2),
-          transparent 55%
-        ),
-        rgba(15, 23, 42, 0.95);
-      padding: 10px 14px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.78rem;
+    footer {
+      border-top: 1px dashed var(--hunter);
+      text-align: center;
+      padding: 20px;
       color: var(--text-soft);
-    }
-
-    .footer-strip strong {
-      color: var(--accent);
-    }
-
-    @media (max-width: 980px) {
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .header-hud {
-        align-items: flex-start;
-      }
-      .footer-strip {
-        margin: 0 10px 12px;
-      }
+      background:
+        radial-gradient(circle at left, var(--hunter-fade), transparent 55%),
+        rgba(5,74,41,0.95);
+      margin-top: 40px;
+      font-size: 0.85rem;
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <div class="brand-block">
-      <div class="brand-line">
-        <div class="brand-school">Booker T. Washington High School</div>
-        <div class="brand-city">Memphis DC · Outernet Alumni Node</div>
-      </div>
-      <div class="brand-motto">“We Lead, Others Follow”</div>
+
+<header>
+  <div class="brand">BTW WARRIORS • WEBTOWER</div>
+</header>
+
+<div class="content">
+
+  <!-- ============================== -->
+  <!-- PANEL: IDENTITY + GATES        -->
+  <!-- ============================== -->
+  <section class="panel">
+    <div class="panel-title">Gate Assignment: BTW Warriors</div>
+    <div class="panel-subtitle">
+      WebTower is the structural and digital craftsmanship gate inside Memphis DC.
+      <br/>Assigned Gates:
+      <br/>• Gate 3 — Wolfpack Planetarium  
+      <br/>• Gate 4 — Mycelium901 Corridor Gate  
+      <br/>• Gate 5 — Proof Stack Main Port  
+    </div>
+  </section>
+
+  <!-- ============================== -->
+  <!-- PANEL: MAP SYSTEM              -->
+  <!-- ============================== -->
+  <section class="panel">
+    <div class="panel-title">Memphis DC • Alumni Grid System</div>
+    <div class="panel-subtitle">
+      Toggle between:
+      <br/>• <b>OPEN GRID “B10”</b> — Memphis DC Operational Map  
+      <br/>• <b>SEAT “2C”</b> — BTW 100,000-Seat Alumni Aircraft  
     </div>
 
-    <div class="header-hud">
-      <div class="hud-line">
-        <div class="hud-pill">
-          <span class="hud-dot"></span>
-          <span class="label">ALUMNI BUSINESS GRID · LIVE</span>
-        </div>
-      </div>
-      <div class="hud-line">
-        <span>🎓 CITYWIDE TRACK:</span>
-        <span>BTW · Mitchell · Carver · Melrose · Central · Hamilton · Treadwell · + more</span>
-      </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="showOperational()">OPEN GRID “B10”</button>
+      <button class="btn btn-primary" onclick="showAircraft()">SEAT “2C”</button>
     </div>
-  </header>
 
-  <main>
-    <!-- Left panel: Trophy Cabinet / Alumni Onboarding -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title-block">
-          <div class="panel-title">Alumni Trophy Cabinet</div>
-          <div class="panel-subtitle">
-            BTW graduates lock in their businesses, skills, and zip codes into the Memphis DC grid.
-          </div>
-        </div>
-        <div class="panel-tag">WebTower · BTW</div>
-      </div>
+    <div class="map-frame-wrap">
+      <!-- OP GRID -->
+      <iframe
+        id="mapOperational"
+        class="map-frame"
+        src="https://www.google.com/maps/d/u/5/embed?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI">
+      </iframe>
 
-      <div class="panel-body">
-        <div class="badge-row">
-          <div class="badge badge-gold">
-            <span class="badge-dot"></span>
-            <span>Memphis DC · Outernet Capital</span>
-          </div>
-          <div class="badge badge-blue">
-            <span class="badge-dot"></span>
-            <span>BTW Alumni Business Registry</span>
-          </div>
-          <div class="badge badge-soft">
-            <span class="badge-dot"></span>
-            <span>Zip-code anchored · Seat-based grid</span>
-          </div>
-        </div>
+      <!-- AIRCRAFT -->
+      <iframe
+        id="mapAircraft"
+        class="map-frame"
+        style="display:none"
+        src="https://www.google.com/maps/d/u/5/embed?mid=18Yj7AtSMyKJeQjrOQoFZy_S4QtOa4VY">
+      </iframe>
+    </div>
+  </section>
 
-        <p>
-          This WebTower is a digital trophy cabinet for
-          <strong>Booker T. Washington High School alumni</strong>.
-          Every graduate who starts a business, leads a project, or serves the city
-          can register here and be pinned into the
-          <strong>Memphis DC Outernet grid</strong>.
-        </p>
+  <!-- ============================== -->
+  <!-- PANEL: ADD YOUR BUSINESS       -->
+  <!-- ============================== -->
+  <section class="panel">
+    <div class="panel-title">Add Your Business • BTW Alumni</div>
+    <a
+      class="btn btn-primary"
+      href="https://docs.google.com/forms/d/e/1FAIpQLSfMZ2OgBmK40rPL_Oo-4fgFWNiyrsXqmHFbj1hz0X0NAxxNPw/viewform?usp=sharing"
+      target="_blank">
+      OPEN ALUMNI BUSINESS FORM
+    </a>
+  </section>
 
-        <p>
-          Each alumni entry includes:
-        </p>
-        <ul>
-          <li>Full name &amp; graduating class year</li>
-          <li>Business / craft / professional lane</li>
-          <li>Primary zip code &amp; service area</li>
-          <li>Contact link (website, Linktree, or social)</li>
-        </ul>
+</div>
 
-        <p>
-          When the form is submitted, the FlightLine system uses Google, GitHub,
-          and Gemini to:
-        </p>
-        <ul>
-          <li>Log the record into a protected <strong>Keith Ledger sheet</strong></li>
-          <li>Assign a seat on the Memphis DC map for that school &amp; zip code</li>
-          <li>Prepare a future WebTower skeleton if the alum wants a full site</li>
-        </ul>
+<footer>
+  Powered by FlightLine Memphis DC • Mycelium901 • Wolfpack Planetarium
+</footer>
 
-        <div class="btn-row">
-          <a
-            class="btn btn-primary"
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfMZ2OgBmK40rPL_Oo-4fgFWNiyrsXqmHFbj1hz0X0NAxxNPw/viewform?usp=publish-editor"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="icon">📝</span>
-            <span>BTW Alumni · Add My Business</span>
-          </a>
+<script>
+  function showOperational() {
+    document.getElementById("mapOperational").style.display = "block";
+    document.getElementById("mapAircraft").style.display = "none";
+  }
+  function showAircraft() {
+    document.getElementById("mapOperational").style.display = "none";
+    document.getElementById("mapAircraft").style.display = "block";
+  }
+</script>
 
-          <a
-            class="btn btn-gold"
-            href="https://taylor7617.github.io/flightline-memphisdc/#proof-stack"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="icon">🛫</span>
-            <span>Open FlightLine Proof Stack</span>
-          </a>
-
-          <a
-            class="btn"
-            href="https://taylor7617.github.io/wolfpack-plantarium-museum/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span class="icon">🌍</span>
-            <span>Open Keith Ledger Registry</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Right panel: Map Window -->
-    <section class="panel">
-      <div class="panel-header">
-        <div class="panel-title-block">
-          <div class="panel-title">Memphis DC · Alumni Map Window</div>
-          <div class="panel-subtitle">
-            BTW and every inner-city high school will share this 100,000-seat grid,
-            with each school holding its own tower and cabinet.
-          </div>
-        </div>
-        <div class="panel-tag">Outernet Flight Papers</div>
-      </div>
-
-      <div class="panel-body" style="flex: 1; display: flex; flex-direction: column; gap: 10px;">
-        <p>
-          This map link is the shared <strong>Memphis DC alumni flight grid</strong>.
-          Seats and pins are allocated by:
-        </p>
-        <ul>
-          <li>High school (BTW, Mitchell, Carver, Melrose, Central, Hamilton, Treadwell…)</li>
-          <li>Zip code &amp; neighborhood</li>
-          <li>Business type or skill lane</li>
-        </ul>
-
-        <div class="map-frame-wrap">
-          <!-- Viewer/Embed for your map -->
-          <iframe
-            class="map-frame"
-            src="https://www.google.com/maps/d/u/5/embed?mid=14Sl2Gec79x4JjCCqQY4BTaA15FZ8XLI"
-            loading="lazy"
-          ></iframe>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <div class="footer-strip">
-    <span>
-      This WebTower is a <strong>BTW alumni</strong> node inside the
-      <strong>Memphis DC Outernet</strong>. Nothing is sold here; access is by
-      seat, gate, and registry.
-    </span>
-    <span>
-      Physical deliveries route through Wing.com partners · digital custody flows
-      through Google (GI), GitHub, Stripe, and the Wolfpack Keith Ledger.
-    </span>
-  </div>
 </body>
 </html>
