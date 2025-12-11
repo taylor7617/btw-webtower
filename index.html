@@ -1,253 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>BTW WebTower | Mycelium901 Builder Terminal | Memphis DC</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booker T. Washington WebTower | Memphis DC Alumni Grid</title>
 
-<style>
+  <meta name="description" content="Booker T. Washington Alumni WebTower — a FlightLine Memphis DC Outernet node where BTW alumni register their businesses, lock in their zip codes, and appear on the citywide alumni grid." />
+  <meta name="theme-color" content="#0B3D24" />
 
-/* === GLOBAL STYLES === */
-body {
-  margin: 0;
-  background: #080d12;
-  color: #e6eef5;
-  font-family: Arial, sans-serif;
-  line-height: 1.55;
-}
+  <style>
+    :root {
+      --bg: #020617;
+      --bg-alt: #020617;
+      --panel: #020617;
+      --glass: rgba(15, 23, 42, 0.92);
+      --border: #1f2937;
 
-/* === BLUEPRINT GRID BACKGROUND === */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-image: linear-gradient(#0e1620 1px, transparent 1px),
-                    linear-gradient(90deg, #0e1620 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.06;
-  pointer-events: none;
-}
+      /* NEW BTW COLORS */
+      --accent: #0B3D24;          /* Hunter Green */
+      --accent-soft: rgba(11, 61, 36, 0.15);
+      --accent-gold: #C5A100;     /* Old Gold */
+      --accent-red: #f97373;
 
-/* === HEADERS === */
-h1, h2, h3 {
-  font-weight: 700;
-  letter-spacing: .5px;
-}
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+    }
 
-/* === TERMINAL HEADER === */
-.terminal-header {
-  text-align: center;
-  padding: 90px 20px;
-  background: linear-gradient(135deg, #002b18, #004428);
-  border-bottom: 4px solid #00ff88;
-}
-.terminal-header h1 {
-  font-size: 2.8rem;
-  margin: 0;
-}
-.runway-green {
-  width: 200px;
-  height: 4px;
-  background: #00ff88;
-  margin: 20px auto 0 auto;
-  animation: pulse 2s infinite ease-in-out;
-}
-@keyframes pulse {
-  0% { opacity: .3; }
-  50% { opacity: 1; }
-  100% { opacity: .3; }
-}
+    * {
+      box-sizing: border-box;
+    }
 
-/* === GATE SECTIONS === */
-.gate {
-  padding: 40px 20px;
-  margin-top: 20px;
-  border-top: 4px solid;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, #0b1120, #020617 55%, #000 100%);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
 
-/* Gate Colors */
-.gate-4 { background: #09150d; border-top-color:#00ff88; }
-.gate-3 { background: #0a0f14; border-top-color:#8b5cff; }
+    header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(
+        to right,
+        rgba(15, 23, 42, 0.96),
+        rgba(11, 61, 36, 0.90) /* hunter green tint */
+      );
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-/* === PANELS === */
-.panel {
-  padding: 20px;
-  margin-top: 25px;
-  border-left: 4px solid;
-}
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
 
-/* Panel Colors */
-.panel-4 { background:#0c1f12; border-left-color:#00ff88; }
-.panel-3 { background:#141a28; border-left-color:#8b5cff; }
+    .brand-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: baseline;
+    }
 
-/* === BUILDER BLUEPRINT PANEL === */
-.blueprint-panel {
-  background: rgba(13, 25, 34, 0.7);
-  padding: 30px;
-  margin: 40px 0;
-  border-left: 4px solid #00ff88;
-}
-.blueprint-panel h2 {
-  margin-top: 0;
-  color:#00ff88;
-}
+    .brand-school {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+    }
 
-/* === LINEAGE WALL === */
-.lineage {
-  background:#0c141f;
-  margin-top: 40px;
-  padding: 40px 20px;
-  border-left: 4px solid #8b5cff;
-}
-.lineage h2 {
-  color:#8b5cff;
-}
-.lineage ul {
-  list-style:none;
-  padding:0;
-  margin-top:20px;
-}
-.lineage li {
-  padding:8px 0;
-  border-bottom:1px solid #1f2a3a;
-  font-size:1.1rem;
-}
+    .brand-city {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+    }
 
-/* === FOOTER LAW === */
-.footer-law {
-  background:#000;
-  padding:30px;
-  margin-top:60px;
-  text-align:center;
-  font-size:1.2rem;
-  letter-spacing:.8px;
-  border-top:4px solid #00ff88;
-}
+    .brand-motto {
+      font-size: 0.8rem;
+      font-style: italic;
+      color: var(--accent);
+    }
 
-</style>
-</head>
-<body>
+    .header-hud {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
 
-<!-- ==================================================== -->
-<!-- TERMINAL HEADER -->
-<!-- ==================================================== -->
+    .hud-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: flex-end;
+    }
 
-<header class="terminal-header">
-  <h1>BTW WebTower</h1>
-  <p>Memphis DC | Builder Terminal | Craft & Corridor Operations</p>
-  <div class="runway-green"></div>
-</header>
+    .hud-pill {
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      background: rgba(15, 23, 42, 0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
 
-<!-- ==================================================== -->
-<!-- BLUEPRINT PANEL — CORE WEBTOWER IDENTITY -->
-<!-- ==================================================== -->
+    .hud-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-gold);
+      box-shadow: 0 0 12px rgba(197, 161, 0, 0.9);
+    }
 
-<section class="blueprint-panel">
-  <h2>🏗️ WEBTOWER BLUEPRINT</h2>
-  <p>
-    WebTower is the Builder Temple of Memphis DC.  
-    The Mycelium901 Gate and Wolfpack Planetarium Gate operate here together  
-    to produce digital infrastructure, lanes, tools, globes, and future pilots.  
-  </p>
-  <p>
-    This tower trains siblings, parents, nieces, nephews, and captains  
-    in the craft of digital construction, corridor formation, and structural precision.
-  </p>
-</section>
+    .hud-pill span.label {
+      color: var(--text-soft);
+    }
 
-<!-- ==================================================== -->
-<!-- GATE 4 — MYCELIUM901 (PRIMARY BUILDER GATE) -->
-<!-- ==================================================== -->
+    main {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 18px;
+      padding: 18px;
+    }
 
-<section class="gate gate-4">
-  <h2>🛠️ Gate 4 — Mycelium901 (Craft & Corridor Gate)</h2>
-  <p>
-    The primary engineering gate of Memphis DC.  
-    All builders, craftsmen, technicians, digital masons,  
-    and structural operators function under Mycelium901.
-  </p>
-
-  <div class="panel panel-4">
-    <h3>Gate 4 Functions</h3>
-    <ul>
-      <li>Digital corridor construction</li>
-      <li>WebTower tool mastery & training</li>
-      <li>Memphis node building & lane structure</li>
-      <li>Repair, maintenance, and precision operations</li>
-      <li>Craftsmanship across GitHub, Maps, QR, AI, and 3D worlds</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ==================================================== -->
-<!-- GATE 3 — WOLFPACK PLANETARIUM (STARS + SEEDS) -->
-<!-- ==================================================== -->
-
-<section class="gate gate-3">
-  <h2>🌌 Gate 3 — Wolfpack Planetarium (Stars & Seeds)</h2>
-  <p>
-    The children and youth system of Memphis DC.  
-    All worlds, stars, globes, and DSX universes begin here.  
-    Wolfpack = future pilots, future architects, future operators.
-  </p>
-
-  <div class="panel panel-3">
-    <h3>Gate 3 Controls</h3>
-    <ul>
-      <li>DSX Pack training for children</li>
-      <li>Digital globe creation & world-building</li>
-      <li>Wolfpack star system expansion</li>
-      <li>Future builders pipeline</li>
-      <li>Leadership development for next generation architects</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ==================================================== -->
-<!-- OPERATIONS BOARD (BUILDER TRAINING MODULE) -->
-<!-- ==================================================== -->
-
-<section class="blueprint-panel">
-  <h2>🧰 Builder Training Module</h2>
-  <p>
-    WebTower is where Memphis DC teaches:
-  </p>
-  <ul>
-    <li>How to build digital real estate</li>
-    <li>How to form AI-assisted corridors</li>
-    <li>How to use GitHub as an engineering shop</li>
-    <li>How to operate QR + Stripe + DSX as unified flow</li>
-    <li>How to create globes, lanes, and maps</li>
-  </ul>
-</section>
-
-<!-- ==================================================== -->
-<!-- LINEAGE WALL -->
-<!-- ==================================================== -->
-
-<section class="lineage">
-  <h2>⏳ Memphis DC Builder Lineage</h2>
-
-  <ul>
-    <li>1758 — Fulton County, GA Ancestors</li>
-    <li>1820 — Virginia Line Roots</li>
-    <li>1930 — Grandmother Born</li>
-    <li>1949 — Father (Arguster Taylor) Born</li>
-    <li>1977 — Brother Born</li>
-    <li>1985 — Keith Taylor Born (Memphis, TN)</li>
-    <li>2016 — Dezeraé Born</li>
-    <li>2017 — Da’Mani Born</li>
-  </ul>
-</section>
-
-<!-- ==================================================== -->
-<!-- FOOTER LAW -->
-<!-- ==================================================== -->
-
-<footer class="footer-law">
-  “NOTHING IS BUILT IN MEMPHIS DC THAT DOES NOT SERVE FAMILY, CITY, AND BALANCE.”
-</footer>
-
-</body>
-</html>
+    .panel {
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: radial-gradient(
+          circle at top left,
+          rgba(11, 61, 36, 0.4),
+          transparent 55%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(197, 161, 0, 0.25),
+          transparent 55%
+        ),
+        var(--glass);
+      box-shadow:
+        0 22px 45px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(15, 23, 42, 0.9);
+      padding: 16px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 0;
+    }
